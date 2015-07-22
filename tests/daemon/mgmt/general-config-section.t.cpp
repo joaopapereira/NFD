@@ -39,9 +39,11 @@ class GeneralConfigSectionFixture : public BaseFixture
 public:
   ~GeneralConfigSectionFixture()
   {
+#ifdef HAVE_PRIVILEGE_DROP_AND_ELEVATE
     // revert changes to s_normalUid/s_normalGid, if any
     PrivilegeHelper::s_normalUid = ::geteuid();
     PrivilegeHelper::s_normalGid = ::getegid();
+#endif
   }
 };
 
